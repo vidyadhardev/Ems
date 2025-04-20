@@ -13,8 +13,7 @@ const AddDepartment = () => {
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(department);
-
+        // console.log(department);
         try {
             const response = await axios.post('http://localhost:5000/api/department/add', department, {
                 headers: {

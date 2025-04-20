@@ -47,7 +47,7 @@ const Login = () => {
             
             <div className='border shadow p-6 w-96 bg-white rounded-md border-l-rose-900'>
                 <h2 className=' text-2xl font-bold mb-4'>
-                    Login User ..
+                    Login User
                 </h2>
                 {error && <p className='text-red-500 mb-4'>{error}</p>}
                 <form onSubmit={handleSubmit}>
