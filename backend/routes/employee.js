@@ -1,8 +1,8 @@
 import express from 'express';
 import authMiddleware from '../middleware/authMiddleware.js';
-import { addEmployee, upload } from '../controller/employeeController.js';
+import { addEmployee, upload ,getEmployees} from '../controller/employeeController.js';
 const router = express.Router();
-// router.get('/', authMiddleware, getDepartments);
+router.get('/', authMiddleware, getEmployees);
 router.post('/add', authMiddleware, upload.single('image'), addEmployee);
 // router.get('/:id', authMiddleware, getDepartment);
 // router.put('/:id', authMiddleware, updateDepartment);

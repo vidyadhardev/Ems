@@ -71,5 +71,14 @@ const addEmployee = async (req, res) => {
         return res.status(500).json({ success: false, error: "Server error while adding employee" });
     }
 };
-
-export { addEmployee, upload };
+const getEmployees = async (req, res) => {
+    try {
+        // const employees = await Employee.find().populate('userId', { password: 0 }).populate('department') 
+        // //if use Populate then getting some error
+        const employees = await Employee.find()
+        return res.status(200).json({ success: true, employees, message: "employee added." })
+    } catch (error) {
+        return res.status(500).json({ success: false, error: "get employee server error !" })
+    }
+}
+export { addEmployee, upload, getEmployees };

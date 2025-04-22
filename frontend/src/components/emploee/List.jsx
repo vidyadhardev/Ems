@@ -1,6 +1,46 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { columns, EmplyeeButtons } from '../../utils/EmployeeHelper.jsx';
+import DataTable from 'react-data-table-component';
+import axios from 'axios';
 const List = () => {
+    const [employees, setEmployees] = useState([ ]);
+    const [empLoading, setEmpLoading] = useState(false);
+
+    useEffect(() => {
+        const fetchEmployees = async () => {
+            // debugger;
+            setEmpLoading(true);
+            try {
+                const response = await axios.get('http://localhost:5000/api/employee', {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`
+                    }
+                });
+                if (response.data.success) {
+                    let sno = 1;
+                    const data = await response.data.employees.map((emp) => ({
+                        _id: emp._id,
+                        sno: sno++,
+                        dep_name: emp.department.dep_name,
+                        name: emp.userId.name,
+                        dob: new Date(emp.dob).toDateString(),
+                        profileImage: emp.userId.profileImage,
+                        action: (<EmplyeeButtons Id={emp._id} />),
+                    }));
+                    setEmployees(data);
+                }
+            } catch (error) {
+                if (error.response && !error.response.data.success) {
+                    alert(error.response.data.error, "Error")
+                }
+            } finally {
+                setEmpLoading(false);
+            }
+        }
+        fetchEmployees();
+    }, [])
+
     return (
         <div className='p-3'>
             <div className='text-center'>
@@ -17,6 +57,9 @@ const List = () => {
                 >
                     Add New Employee
                 </Link>
+            </div>
+            <div className='mt-4'>
+                <DataTable columns={columns} data={employees} />
             </div>
         </div>
     );

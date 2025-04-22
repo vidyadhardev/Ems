@@ -16,6 +16,7 @@ app.use('/api/department',departmentRouter)
 app.use('/api/employee',employeeRouter)
 userRegister();
 connectToDataBase()
+
 app.get('/', (req, res) => {
   res.send('Server is running ...');
 });

@@ -44,14 +44,13 @@ const Add = () => {
             );
 
             if (response.data.success) {
+                alert(response.data.message);
                 navigate('/admin-dashboard/employee');
             }
         } catch (error) {
             if (error.response && !error.response.data.success) {
-                alert(error.response.data.error)
-                console.log(error.message);
-
-            }
+                console.error(error.response.data.error)
+             }
         }
     };
 
@@ -67,7 +66,7 @@ const Add = () => {
                         >
                             Name
                         </label>
-                        <input type="text" name="name" placeholder="Name" onChange={handleChange} required />
+                        <input type="text" name="name" className='w-full' placeholder="Name" onChange={handleChange} required />
                     </div>
                     <div>
                         <label
@@ -76,7 +75,7 @@ const Add = () => {
                         >
                             E-Mail
                         </label>
-                        <input type="email" name="email" placeholder="Email" onChange={handleChange} required />
+                        <input type="email" name="email" className='w-full' placeholder="Email" onChange={handleChange} required />
                     </div>
                     <div>
                         <label
@@ -85,7 +84,7 @@ const Add = () => {
                         >
                             EmployeeId
                         </label>
-                        <input type="text" name="employeeId" placeholder="Employee ID" onChange={handleChange} required />
+                        <input type="text" name="employeeId" className='w-full' placeholder="Employee ID" onChange={handleChange} required />
                     </div>
                     <div>
                         <label
@@ -94,7 +93,7 @@ const Add = () => {
                         >
                             DOB
                         </label>
-                        <input type="date" name="dob" onChange={handleChange} required />
+                        <input type="date" name="dob" className='w-full' onChange={handleChange} required />
                     </div>
                     <div>
                         <label
@@ -103,7 +102,7 @@ const Add = () => {
                         >
                             Gender
                         </label>
-                        <select name="gender" onChange={handleChange} required>
+                        <select name="gender" className='w-full' onChange={handleChange} required>
                             <option value="" >Select Gender</option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
@@ -117,7 +116,7 @@ const Add = () => {
                         >
                             Marital Status
                         </label>
-                        <select name="maritalStatus" onChange={handleChange} required>
+                        <select name="maritalStatus" className='w-full' onChange={handleChange} required>
                             <option value="">Select Marital Status</option>
                             <option value="single">Single</option>
                             <option value="married">Married</option>
@@ -145,7 +144,7 @@ const Add = () => {
                         >
                             Salary
                         </label>
-                        <input type="number" name="salary" placeholder="Salary" onChange={handleChange} required />
+                        <input type="number" className='w-full' name="salary" placeholder="Salary" onChange={handleChange} required />
                     </div>
                     <div>
                         <label
@@ -155,7 +154,7 @@ const Add = () => {
 
                             Password
                         </label>
-                        <input type="password" name="password" placeholder="Password" onChange={handleChange} required />
+                        <input type="password" name="password" className='w-full' placeholder="Password" onChange={handleChange} required />
                     </div>
                     <div>
                         <label
@@ -164,7 +163,7 @@ const Add = () => {
                         >
                             Role
                         </label>
-                        <select name="role" onChange={handleChange} required>
+                        <select name="role" className='w-full' onChange={handleChange} required>
                             <option value="" disabled>Select Role</option>
                             <option value="admin">Admin</option>
                             <option value="employee">Employee</option>
