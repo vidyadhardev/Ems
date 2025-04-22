@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-dotenv.config(); 
+dotenv.config();
 
 const connectToDataBase = async () => {
   try {
@@ -10,5 +10,4 @@ const connectToDataBase = async () => {
     console.error("Error while connecting to database:", error);
   }
 };
-
 export default connectToDataBase;

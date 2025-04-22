@@ -31,7 +31,6 @@ const Add = () => {
         Object.keys(formData).forEach((key) => {
             formDataObj.append(key, formData[key]);
         });
-
         try {
             const response = await axios.post(
                 'http://localhost:5000/api/employee/add',
@@ -61,38 +60,129 @@ const Add = () => {
             <h2 className='text-2xl font-bold mb-6'>Add New Employee</h2>
             <form onSubmit={handleSubmit}>
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-                    <input type="text" name="name" placeholder="Name" onChange={handleChange} required />
-                    <input type="email" name="email" placeholder="Email" onChange={handleChange} required />
-                    <input type="text" name="employeeId" placeholder="Employee ID" onChange={handleChange} required />
-                    <input type="date" name="dob" onChange={handleChange} required />
-                    <select name="gender" onChange={handleChange} required>
-                        <option value="" disabled>Select Gender</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="other">Other</option>
-                    </select>
-                    <select name="maritalStatus" onChange={handleChange} required>
-                        <option value="" disabled>Select Marital Status</option>
-                        <option value="single">Single</option>
-                        <option value="married">Married</option>
-                    </select>
-                    <input type="text" name="designation" placeholder="Designation" onChange={handleChange} required />
-                    <select name="department" onChange={handleChange} required>
-                        <option value="" disabled>Select Department</option>
-                        {departments.map(dep => (
-                            <option key={dep._id} value={dep._id}>{dep.dep_name}</option>
-                        ))}
-                    </select>
-                    <input type="number" name="salary" placeholder="Salary" onChange={handleChange} required />
-                    <input type="password" name="password" placeholder="Password" onChange={handleChange} required />
-                    <select name="role" onChange={handleChange} required>
-                        <option value="" disabled>Select Role</option>
-                        <option value="admin">Admin</option>
-                        <option value="employee">Employee</option>
-                    </select>
-                    <input type="file" name="image" accept="image/*" onChange={handleChange} />
+                    <div>
+                        <label
+                            htmlFor='dep_name'
+                            className='block text-sm font-medium text-gray-700'
+                        >
+                            Name
+                        </label>
+                        <input type="text" name="name" placeholder="Name" onChange={handleChange} required />
+                    </div>
+                    <div>
+                        <label
+                            htmlFor='dep_name'
+                            className='block text-sm font-medium text-gray-700'
+                        >
+                            E-Mail
+                        </label>
+                        <input type="email" name="email" placeholder="Email" onChange={handleChange} required />
+                    </div>
+                    <div>
+                        <label
+                            htmlFor='dep_name'
+                            className='block text-sm font-medium text-gray-700'
+                        >
+                            EmployeeId
+                        </label>
+                        <input type="text" name="employeeId" placeholder="Employee ID" onChange={handleChange} required />
+                    </div>
+                    <div>
+                        <label
+                            htmlFor='dep_name'
+                            className='block text-sm font-medium text-gray-700'
+                        >
+                            DOB
+                        </label>
+                        <input type="date" name="dob" onChange={handleChange} required />
+                    </div>
+                    <div>
+                        <label
+                            htmlFor='dep_name'
+                            className='block text-sm font-medium text-gray-700'
+                        >
+                            Gender
+                        </label>
+                        <select name="gender" onChange={handleChange} required>
+                            <option value="" >Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label
+                            htmlFor='dep_name'
+                            className='block text-sm font-medium text-gray-700'
+                        >
+                            Marital Status
+                        </label>
+                        <select name="maritalStatus" onChange={handleChange} required>
+                            <option value="">Select Marital Status</option>
+                            <option value="single">Single</option>
+                            <option value="married">Married</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label
+                            htmlFor='dep_name'
+                            className='block text-sm font-medium text-gray-700'
+                        >
+                            Department
+                        </label>
+                        {/* <input type="text" name="designation" placeholder="Department" onChange={handleChange} required /> */}
+                        <select name="department" className='w-full' onChange={handleChange} required>
+                            <option value="">Select Department</option>
+                            {departments.map(dep => (
+                                <option key={dep._id} value={dep._id}>{dep.dep_name}</option>
+                            ))}
+                        </select>
+                    </div>
+                    <div>
+                        <label
+                            htmlFor='dep_name'
+                            className='block text-sm font-medium text-gray-700'
+                        >
+                            Salary
+                        </label>
+                        <input type="number" name="salary" placeholder="Salary" onChange={handleChange} required />
+                    </div>
+                    <div>
+                        <label
+                            htmlFor='dep_name'
+                            className='block text-sm font-medium text-gray-700'
+                        >
+
+                            Password
+                        </label>
+                        <input type="password" name="password" placeholder="Password" onChange={handleChange} required />
+                    </div>
+                    <div>
+                        <label
+                            htmlFor='dep_name'
+                            className='block text-sm font-medium text-gray-700'
+                        >
+                            Role
+                        </label>
+                        <select name="role" onChange={handleChange} required>
+                            <option value="" disabled>Select Role</option>
+                            <option value="admin">Admin</option>
+                            <option value="employee">Employee</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label
+                            htmlFor='dep_name'
+                            className='block text-sm font-medium text-gray-700'
+                        >
+                            Image
+                        </label>
+                        <input type="file" name="image" accept="image/*" onChange={handleChange} />
+                    </div>
                 </div>
-                <button type="submit" className="mt-6 bg-teal-700 text-white px-4 py-2 rounded-md">Submit</button>
+                <div>
+                    <button type="submit" className="w-full mt-6 bg-teal-700 text-white px-4 py-2 rounded-md">Submit</button>
+                </div>
             </form>
         </div>
     );
