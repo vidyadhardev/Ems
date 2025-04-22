@@ -10,6 +10,8 @@ import AdminSummary from "./components/dashboard/AdminSummary";
 import DepartmentsList from "./components/department/DepartmentsList";
 import AddDepartment from "./components/department/AddDepartment";
 import EditDepartments from "./components/department/EditDepartments";
+import List from "./components/emploee/List";
+import Add from "./components/emploee/Add";
 const App = () => {
   return (
     <>
@@ -29,6 +31,9 @@ const App = () => {
             <Route path="/admin-dashboard/departments" element={<DepartmentsList />}></Route>
             <Route path="/admin-dashboard/add-department" element={<AddDepartment />}></Route>
             <Route path="/admin-dashboard/department/:id" element={<EditDepartments />}></Route>
+            <Route path="/admin-dashboard/employee" element={<List />}></Route>
+            <Route path="/admin-dashboard/add-employee" element={<Add />}></Route>
+
           </Route>
           <Route path="/employee-dashboard" element={<EmployeeDashboard />} />
         </Routes>

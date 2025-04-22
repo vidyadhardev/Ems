@@ -1,0 +1,101 @@
+import React, { useEffect, useState } from 'react';
+import { fetchDepartments } from '../../utils/EmployeeHelper';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
+const Add = () => {
+    const [departments, setDepartments] = useState([]);
+    const [formData, setFormData] = useState({});
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const getDepartment = async () => {
+            const department = await fetchDepartments();
+            setDepartments(department);
+        };
+        getDepartment();
+    }, []);
+
+    const handleChange = (e) => {
+        const { name, value, files } = e.target;
+        if (name === 'image') {
+            setFormData((prev) => ({ ...prev, [name]: files[0] }));
+        } else {
+            setFormData((prev) => ({ ...prev, [name]: value }));
+        }
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const formDataObj = new FormData();
+        Object.keys(formData).forEach((key) => {
+            formDataObj.append(key, formData[key]);
+        });
+
+        try {
+            const response = await axios.post(
+                'http://localhost:5000/api/employee/add',
+                formDataObj,
+                {
+                    headers: {
+                        "Authorization": `Bearer ${localStorage.getItem('token')}`,
+                        "Content-Type": "multipart/form-data"
+                    }
+                }
+            );
+
+            if (response.data.success) {
+                navigate('/admin-dashboard/employee');
+            }
+        } catch (error) {
+            if (error.response && !error.response.data.success) {
+                alert(error.response.data.error)
+                console.log(error.message);
+
+            }
+        }
+    };
+
+    return (
+        <div className='max-w-4xl mx-auto mt-10 bg-white p-8 rounded-md shadow-md'>
+            <h2 className='text-2xl font-bold mb-6'>Add New Employee</h2>
+            <form onSubmit={handleSubmit}>
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                    <input type="text" name="name" placeholder="Name" onChange={handleChange} required />
+                    <input type="email" name="email" placeholder="Email" onChange={handleChange} required />
+                    <input type="text" name="employeeId" placeholder="Employee ID" onChange={handleChange} required />
+                    <input type="date" name="dob" onChange={handleChange} required />
+                    <select name="gender" onChange={handleChange} required>
+                        <option value="" disabled>Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <select name="maritalStatus" onChange={handleChange} required>
+                        <option value="" disabled>Select Marital Status</option>
+                        <option value="single">Single</option>
+                        <option value="married">Married</option>
+                    </select>
+                    <input type="text" name="designation" placeholder="Designation" onChange={handleChange} required />
+                    <select name="department" onChange={handleChange} required>
+                        <option value="" disabled>Select Department</option>
+                        {departments.map(dep => (
+                            <option key={dep._id} value={dep._id}>{dep.dep_name}</option>
+                        ))}
+                    </select>
+                    <input type="number" name="salary" placeholder="Salary" onChange={handleChange} required />
+                    <input type="password" name="password" placeholder="Password" onChange={handleChange} required />
+                    <select name="role" onChange={handleChange} required>
+                        <option value="" disabled>Select Role</option>
+                        <option value="admin">Admin</option>
+                        <option value="employee">Employee</option>
+                    </select>
+                    <input type="file" name="image" accept="image/*" onChange={handleChange} />
+                </div>
+                <button type="submit" className="mt-6 bg-teal-700 text-white px-4 py-2 rounded-md">Submit</button>
+            </form>
+        </div>
+    );
+};
+
+export default Add;
