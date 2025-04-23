@@ -6,11 +6,10 @@ const userRegister = async () => {
   try {
     // password encripted by bcrypt
     const hashPassword = await bcrypt.hash("vidya", 10)
-    //  Here User imported From Model
+    //  Here User imported From Model 
     const newUser = new User({
       name: "Admin",
       email: "vidya@gmail.com",
-      // email:"admin@gmail.com",
       password: hashPassword,
       role: "admin"
     });

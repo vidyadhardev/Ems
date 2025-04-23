@@ -53,34 +53,6 @@ export const fetchDepartments = async () => {
 
 export const EmplyeeButtons = ({ _id }) => {
     const navigate = useNavigate();
-    // <------- Delete Method Create From Frontend----->
-    // const handleDelete = async (_id, onDepartmentDelete) => {
-    //     const isConfirmed = window.confirm("Are you sure you want to delete this record?");
-    //     if (isConfirmed) {
-    //         try {
-    //             const response = await axios.delete(`http://localhost:5000/api/department/${_id}`, {
-    //                 headers: {
-    //                     "Authorization": `Bearer ${localStorage.getItem('token')}`
-    //                 }
-    //             });
-    //             debugger;
-    //             if (response.data.success) {
-    //                 // onDepartmentDelete(_id);
-    //                 window.location.reload();
-    //             } else {
-    //                 alert("Failed to delete the record. Please try again later.");
-    //             }
-
-    //         } catch (error) {
-    //             if (error.response) {
-    //                 alert(error.response.data.error || "An error occurred while deleting.");
-    //             } else {
-    //                 alert("Network or server error. Please try again later.");
-    //             }
-    //         }
-    //     }
-    // }
-
     return (
         <div className="flex space-x-3 font-bold">
             <button

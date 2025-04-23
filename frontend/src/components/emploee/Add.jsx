@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchDepartments } from '../../utils/EmployeeHelper';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Add = () => {
@@ -49,16 +49,20 @@ const Add = () => {
             }
         } catch (error) {
             if (error.response && !error.response.data.success) {
-                console.error(error.response.data.error)
-             }
+                alert(error.response.data.error)
+            }
         }
     };
 
     return (
         <div className='max-w-4xl mx-auto mt-10 bg-white p-8 rounded-md shadow-md'>
-            <h2 className='text-2xl font-bold mb-6'>Add New Employee</h2>
+            <h2 className='text-2xl font-bold mb-4'>Add New Employee</h2>
+            <div className='mt-4'>
+                        <Link to='/admin-dashboard/employee' 
+                        className="w-full bg-teal-700 text-white px-4 py-2 no-underline rounded-md">Go Back</Link>
+                    </div>
             <form onSubmit={handleSubmit}>
-                <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                <div className=' mt-4 grid grid-cols-1 md:grid-cols-2 gap-4'>
                     <div>
                         <label
                             htmlFor='dep_name'
@@ -178,9 +182,11 @@ const Add = () => {
                         </label>
                         <input type="file" name="image" accept="image/*" onChange={handleChange} />
                     </div>
+                    
                 </div>
                 <div>
-                    <button type="submit" className="w-full mt-6 bg-teal-700 text-white px-4 py-2 rounded-md">Submit</button>
+                    <button type="submit" className="w-full mt-6 mb-4 bg-teal-700 text-white px-4 py-2 rounded-md">Submit</button>
+
                 </div>
             </form>
         </div>

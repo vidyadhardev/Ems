@@ -9,9 +9,10 @@ const List = () => {
 
     useEffect(() => {
         const fetchEmployees = async () => {
-            // debugger;
+            debugger;
             setEmpLoading(true);
             try {
+                // debugger;
                 const response = await axios.get('http://localhost:5000/api/employee', {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -19,15 +20,16 @@ const List = () => {
                 });
                 if (response.data.success) {
                     let sno = 1;
-                    const data = await response.data.employees.map((emp) => ({
+                    const data = response.data.employees.map((emp) => ({
                         _id: emp._id,
                         sno: sno++,
-                        dep_name: emp.department.dep_name,
+                        dep_name: emp.department.dep_name ? emp.department.dep_name :"Not Assigned",
                         name: emp.userId.name,
                         dob: new Date(emp.dob).toDateString(),
                         profileImage: emp.userId.profileImage,
                         action: (<EmplyeeButtons Id={emp._id} />),
                     }));
+                    
                     setEmployees(data);
                 }
             } catch (error) {

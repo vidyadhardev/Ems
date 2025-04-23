@@ -13,7 +13,7 @@ const Login = () => {
         try {
 
             const response = await axios.post("http://localhost:5000/api/auth/login",
-                { email, password });
+                { email, password});
             // console.log(response);
             if (response.data.success) {
                 // alert(response.data.message);

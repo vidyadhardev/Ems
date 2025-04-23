@@ -10,7 +10,7 @@ const UserSchema = new mongoose.Schema({
   updateAt: { type:Date, default:Date.now },
 
 })
-const User = mongoose.model("user", UserSchema);
+const User = mongoose.model("User", UserSchema);
 console.log("dbs created .");
 
 export default User;
