@@ -80,4 +80,17 @@ const getEmployees = async (req, res) => {
         return res.status(500).json({ success: false, error: "get employee server error !" })
     }
 }
-export { addEmployee, upload, getEmployees };
+
+// Method Use In Views.jsx Page In frontend
+const getEmployee=async(req,res)=>{
+    const {id}=req.params;
+    try {
+        const employee = await Employee.find({_id:id}).populate('userId', { password: 0 }).populate('department') 
+        //  console.log("Views ",employees);
+        return res.status(200).json({ success: true, employee, message: "employee added." })
+    } catch (error) {
+        return res.status(500).json({ success: false, error: "get employee view server error !" })
+    }
+}
+
+export { addEmployee, upload, getEmployees,getEmployee };

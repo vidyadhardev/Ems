@@ -11,6 +11,9 @@ dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.json());
+// Image Show On This Url In Backend Test http://localhost:5000/1745737490090.jpg
+//  ---{localhost:5000 Where run backend Server} {1745737490090.jpg=> image name }
+app.use(express.static('public/uploads'))
 app.use('/api/auth',authRouter)
 app.use('/api/department',departmentRouter)
 app.use('/api/employee',employeeRouter)

@@ -53,7 +53,7 @@ const DepartmentsList = () => {
     return (
 
         <>{depLoading ? <div>Loading ...</div> :
-            <div className='p-3'>
+            <div className='p-2'>
                 <div className='text-center'>
                     <h3 className='text-2xl font-bold'> Manage Departments</h3>
                 </div>
@@ -68,7 +68,7 @@ const DepartmentsList = () => {
                         className='px-4 py-1 bg-teal-600 text-white no-underline rounded-lg'
                     >Add New Department</Link>
                 </div>
-                <div className='mt-5'>
+                <div className='mt-3'>
                     <DataTable
                         columns={columns}
                         data={fillteredDepartmens}

@@ -6,7 +6,8 @@ const EditDepartments = () => {
     const { id } = useParams();
     const [departments, setDepartment] = useState([]);
     const [depLoading, setDepLoading] = useState(true);
-
+    const navigate = useNavigate();
+    
     useEffect(() => {
         const isConfirmedEdit = window.confirm("Are you sure you want to edit this record?");
         if (isConfirmedEdit) {
@@ -39,7 +40,7 @@ const EditDepartments = () => {
         const { name, value } = e.target;
         setDepartment({ ...departments, [name]: value })
     };
-    const navigate = useNavigate();
+  
     const handleSubmit = async (e) => {
         e.preventDefault();
 

@@ -1,34 +1,103 @@
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+// export const EmplyeeButtons = ({id }) => {
+//     const navigate = useNavigate();
+//     return (
+//         <div className="flex space-x-3 font-bold">
+//             <button
+//                 className="px-3 py-1 bg-green-500 rounded-sm"
+//                 onClick={() => navigate(`/admin-dashboard/employee/${id}`)}
+//             >
+//                 View
+//             </button>
+//             <button
+//                 className="px-3 py-1 bg-blue-500 rounded-sm"
+//             >
+//                 Edit
+//             </button>
+//             <button
+//                 className="px-3 py-1 bg-yellow-500 rounded-sm"
+//             >
+//                 Salary
+//             </button>
+//             <button
+//                 className="px-3 py-1 bg-red-500 rounded-sm"
+//             >
+//                 Leave
+//             </button>
+
+//         </div>
+//     )
+// }
+
+export const EmplyeeButtons = ({ id }) => {
+    const navigate = useNavigate();
+
+    return (
+        <div className="flex space-x-3 font-bold">
+            <button
+                className="px-3 py-1 bg-green-500 rounded-sm"
+                onClick={() => navigate(`/admin-dashboard/employees/${id}`)}
+            >
+                View
+            </button>
+            <button
+                className="px-3 py-1 bg-blue-500 rounded-sm"
+                onClick={() => navigate(`/admin-dashboard/employees/edit/${id}`)}
+            >
+                Edit
+            </button>
+            <button
+                className="px-3 py-1 bg-yellow-500 rounded-sm"
+                onClick={() => navigate(`/admin-dashboard/employees/salary/${id}`)}
+            >
+                Salary
+            </button>
+            <button
+                className="px-3 py-1 bg-red-500 rounded-sm"
+                onClick={() => navigate(`/admin-dashboard/employees/leave/${id}`)}
+            >
+                Leave
+            </button>
+        </div>
+    );
+};
+
 export const columns = [
     {
         name: "Sr No.",
         selector: (row) => row.sno,
+        width: "70px"
     },
     {
         name: "Name",
         selector: (row) => row.name,
-        sortable: true
+        sortable: true,
+        width: "140px"
     },
     {
         name: "Image",
-        selector: (row) => row.profileImage
+        selector: (row) => row.profileImage,
+        width: "90px"
     },
     {
         name: "Department",
         selector: (row) => row.dep_name,
-        sortable: true
+        sortable: true,
+        width: "170px"
     },
     {
         name: "DOB",
-        selector: (row) => row.dob
+        selector: (row) => row.dob,
+        width: "140px"
     },
     {
         name: "Action",
-        selector: (row) => row.action
+        cell: (row) => <EmplyeeButtons id={row._id} />,
+        center: "true"
     },
-   
+
 
 ]
 
@@ -46,37 +115,10 @@ export const fetchDepartments = async () => {
     } catch (error) {
         if (error.response && !error.response.data.success) {
             alert(error.response.data.error)
+            console.log(error.response.data.error);
+
+
         }
     }
     return departments;
 };
-
-export const EmplyeeButtons = ({ _id }) => {
-    const navigate = useNavigate();
-    return (
-        <div className="flex space-x-3 font-bold">
-            <button
-                className="px-3 py-1 bg-green-500 rounded-sm"
-                onClick={() => navigate(`/admin-dashboard/department/${_id}`)}
-            >
-                View
-            </button>
-            <button
-                className="px-3 py-1 bg-blue-500 rounded-sm"
-            >
-                Edit
-            </button>
-            <button
-                className="px-3 py-1 bg-yellow-500 rounded-sm"
-            >
-                Salary
-            </button>
-            <button
-                className="px-3 py-1 bg-red-500 rounded-sm"
-            >
-                Leave
-            </button>
-
-        </div>
-    )
-}

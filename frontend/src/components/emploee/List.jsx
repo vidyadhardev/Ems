@@ -4,15 +4,13 @@ import { columns, EmplyeeButtons } from '../../utils/EmployeeHelper.jsx';
 import DataTable from 'react-data-table-component';
 import axios from 'axios';
 const List = () => {
-    const [employees, setEmployees] = useState([ ]);
+    const [employees, setEmployees] = useState([]);
     const [empLoading, setEmpLoading] = useState(false);
 
     useEffect(() => {
         const fetchEmployees = async () => {
-            debugger;
             setEmpLoading(true);
             try {
-                // debugger;
                 const response = await axios.get('http://localhost:5000/api/employee', {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -23,13 +21,16 @@ const List = () => {
                     const data = response.data.employees.map((emp) => ({
                         _id: emp._id,
                         sno: sno++,
-                        dep_name: emp.department.dep_name ? emp.department.dep_name :"Not Assigned",
+                        dep_name: emp.department.dep_name ? emp.department.dep_name.toLowerCase()
+                            .split(' ')
+                            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                            .join(' ') : "Not Assigned",
                         name: emp.userId.name,
-                        dob: new Date(emp.dob).toDateString(),
-                        profileImage: emp.userId.profileImage,
+                        dob: new Date(emp.dob).toLocaleDateString(),
+                        profileImage: <img src={`http://localhost:5000/${emp.userId.profileImage}`} className='w-12 h-12 rounded-full object-cover' />,
                         action: (<EmplyeeButtons Id={emp._id} />),
                     }));
-                    
+
                     setEmployees(data);
                 }
             } catch (error) {
@@ -61,7 +62,7 @@ const List = () => {
                 </Link>
             </div>
             <div className='mt-4'>
-                <DataTable columns={columns} data={employees} />
+                <DataTable columns={columns} data={employees} pagination={true} />
             </div>
         </div>
     );

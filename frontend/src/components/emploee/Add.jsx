@@ -65,7 +65,7 @@ const Add = () => {
                 <div className=' mt-4 grid grid-cols-1 md:grid-cols-2 gap-4'>
                     <div>
                         <label
-                            htmlFor='dep_name'
+                            htmlFor='name'
                             className='block text-sm font-medium text-gray-700'
                         >
                             Name
@@ -74,7 +74,7 @@ const Add = () => {
                     </div>
                     <div>
                         <label
-                            htmlFor='dep_name'
+                            htmlFor='email'
                             className='block text-sm font-medium text-gray-700'
                         >
                             E-Mail
@@ -83,7 +83,7 @@ const Add = () => {
                     </div>
                     <div>
                         <label
-                            htmlFor='dep_name'
+                            htmlFor='employeeId'
                             className='block text-sm font-medium text-gray-700'
                         >
                             EmployeeId
@@ -92,7 +92,7 @@ const Add = () => {
                     </div>
                     <div>
                         <label
-                            htmlFor='dep_name'
+                            htmlFor='dob'
                             className='block text-sm font-medium text-gray-700'
                         >
                             DOB
@@ -101,7 +101,7 @@ const Add = () => {
                     </div>
                     <div>
                         <label
-                            htmlFor='dep_name'
+                            htmlFor='gender'
                             className='block text-sm font-medium text-gray-700'
                         >
                             Gender
@@ -115,7 +115,7 @@ const Add = () => {
                     </div>
                     <div>
                         <label
-                            htmlFor='dep_name'
+                            htmlFor='maritalStatus'
                             className='block text-sm font-medium text-gray-700'
                         >
                             Marital Status
@@ -128,7 +128,7 @@ const Add = () => {
                     </div>
                     <div>
                         <label
-                            htmlFor='dep_name'
+                            htmlFor='department'
                             className='block text-sm font-medium text-gray-700'
                         >
                             Department
@@ -143,7 +143,7 @@ const Add = () => {
                     </div>
                     <div>
                         <label
-                            htmlFor='dep_name'
+                            htmlFor='salary'
                             className='block text-sm font-medium text-gray-700'
                         >
                             Salary
@@ -152,7 +152,7 @@ const Add = () => {
                     </div>
                     <div>
                         <label
-                            htmlFor='dep_name'
+                            htmlFor='password'
                             className='block text-sm font-medium text-gray-700'
                         >
 
@@ -162,7 +162,7 @@ const Add = () => {
                     </div>
                     <div>
                         <label
-                            htmlFor='dep_name'
+                            htmlFor='role'
                             className='block text-sm font-medium text-gray-700'
                         >
                             Role
@@ -175,12 +175,12 @@ const Add = () => {
                     </div>
                     <div>
                         <label
-                            htmlFor='dep_name'
+                            htmlFor='image'
                             className='block text-sm font-medium text-gray-700'
                         >
                             Image
                         </label>
-                        <input type="file" name="image" accept="image/*" onChange={handleChange} />
+                        <input type="file" name="image" accept="image/*" onChange={handleChange} required/>
                     </div>
                     
                 </div>
