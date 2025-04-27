@@ -44,6 +44,8 @@ const Add = () => {
             );
 
             if (response.data.success) {
+                console.log(response.data);
+                
                 alert(response.data.message);
                 navigate('/admin-dashboard/employee');
             }

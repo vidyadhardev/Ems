@@ -38,25 +38,25 @@ export const EmplyeeButtons = ({ id }) => {
         <div className="flex space-x-3 font-bold">
             <button
                 className="px-3 py-1 bg-green-500 rounded-sm"
-                onClick={() => navigate(`/admin-dashboard/employees/${id}`)}
+                onClick={() => navigate(`/admin-dashboard/employee/${id}`)}
             >
                 View
             </button>
             <button
                 className="px-3 py-1 bg-blue-500 rounded-sm"
-                onClick={() => navigate(`/admin-dashboard/employees/edit/${id}`)}
+                onClick={() => navigate(`/admin-dashboard/employee/edit/${id}`)}
             >
                 Edit
             </button>
             <button
                 className="px-3 py-1 bg-yellow-500 rounded-sm"
-                onClick={() => navigate(`/admin-dashboard/employees/salary/${id}`)}
+                onClick={() => navigate(`/admin-dashboard/employee/salary/${id}`)}
             >
                 Salary
             </button>
             <button
                 className="px-3 py-1 bg-red-500 rounded-sm"
-                onClick={() => navigate(`/admin-dashboard/employees/leave/${id}`)}
+                onClick={() => navigate(`/admin-dashboard/employee/leave/${id}`)}
             >
                 Leave
             </button>
@@ -92,6 +92,11 @@ export const columns = [
         selector: (row) => row.dob,
         width: "140px"
     },
+    // {
+    //     name: "Marital Status",
+    //     selector: (row) => row.maritalStatus,
+    //     width: "140px"
+    // },
     {
         name: "Action",
         cell: (row) => <EmplyeeButtons id={row._id} />,
