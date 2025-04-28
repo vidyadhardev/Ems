@@ -13,6 +13,7 @@ import EditDepartments from "./components/department/EditDepartments.jsx";
 import List from "./components/emploee/List.jsx";
 import Add from "./components/emploee/Add.jsx";
 import View from "./components/emploee/View.jsx";
+import Edit from "./components/emploee/Edit.jsx";
 const App = () => {
   return (
     <>
@@ -35,6 +36,7 @@ const App = () => {
             <Route path="/admin-dashboard/employee" element={<List />}></Route>
             <Route path="/admin-dashboard/add-employee" element={<Add />}></Route>
             <Route path="/admin-dashboard/employee/:id" element={<View />}></Route>
+            <Route path="/admin-dashboard/employee/edit/:id" element={<Edit />}></Route>
 
           </Route>
           <Route path="/employee-dashboard" element={<EmployeeDashboard />} />

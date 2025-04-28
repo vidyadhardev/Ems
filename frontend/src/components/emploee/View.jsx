@@ -129,6 +129,7 @@ const View = () => {
                 </div>
                 <div className='space-y-4'>
                     <InfoRow label="Department" value={employee.department?.dep_name || 'N/A'} />
+                    <InfoRow label="Designation" value={employee.designation?.designation || 'N/A'} />
                     <InfoRow label="Description" value={employee.department?.description || 'N/A'} />
                     <InfoRow label="Salary" value={`₹ ${employee.salary}`} />
                     <InfoRow label="Marital Status" value={employee.maritalStatus ? employee.maritalStatus : 'N/A'} />

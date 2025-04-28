@@ -45,7 +45,7 @@ const Add = () => {
 
             if (response.data.success) {
                 console.log(response.data);
-                
+
                 alert(response.data.message);
                 navigate('/admin-dashboard/employee');
             }
@@ -60,9 +60,9 @@ const Add = () => {
         <div className='max-w-4xl mx-auto mt-10 bg-white p-8 rounded-md shadow-md'>
             <h2 className='text-2xl font-bold mb-4'>Add New Employee</h2>
             <div className='mt-4'>
-                        <Link to='/admin-dashboard/employee' 
-                        className="w-full bg-teal-700 text-white px-4 py-2 no-underline rounded-md">Go Back</Link>
-                    </div>
+                <Link to='/admin-dashboard/employee'
+                    className="w-full bg-teal-700 text-white px-4 py-2 no-underline rounded-md">Go Back</Link>
+            </div>
             <form onSubmit={handleSubmit}>
                 <div className=' mt-4 grid grid-cols-1 md:grid-cols-2 gap-4'>
                     <div>
@@ -133,9 +133,24 @@ const Add = () => {
                             htmlFor='department'
                             className='block text-sm font-medium text-gray-700'
                         >
+                            Designation
+                        </label>
+                        <input
+                            type="text"
+                            className='w-full'
+                            name="designation"
+                            placeholder="Designation"
+                            onChange={handleChange}  //1:25 mm
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label
+                            htmlFor='department'
+                            className='block text-sm font-medium text-gray-700'
+                        >
                             Department
                         </label>
-                        {/* <input type="text" name="designation" placeholder="Department" onChange={handleChange} required /> */}
                         <select name="department" className='w-full' onChange={handleChange} required>
                             <option value="">Select Department</option>
                             {departments.map(dep => (
@@ -182,9 +197,9 @@ const Add = () => {
                         >
                             Image
                         </label>
-                        <input type="file" name="image" accept="image/*" onChange={handleChange} required/>
+                        <input type="file" name="image" accept="image/*" onChange={handleChange} required />
                     </div>
-                    
+
                 </div>
                 <div>
                     <button type="submit" className="w-full mt-6 mb-4 bg-teal-700 text-white px-4 py-2 rounded-md">Submit</button>
