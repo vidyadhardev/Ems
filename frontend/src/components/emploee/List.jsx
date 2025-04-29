@@ -6,7 +6,7 @@ import axios from 'axios';
 const List = () => {
     const [employees, setEmployees] = useState([]);
     const [empLoading, setEmpLoading] = useState(false);
-
+    const [filterEmployee, setFilterEmployee] = useState([]);
     useEffect(() => {
         const fetchEmployees = async () => {
             setEmpLoading(true);
@@ -30,8 +30,8 @@ const List = () => {
                         profileImage: <img src={`http://localhost:5000/${emp.userId.profileImage}`} className='w-12 h-12 rounded-full object-cover' />,
                         action: (<EmplyeeButtons Id={emp._id} />),
                     }));
-
                     setEmployees(data);
+                    setFilterEmployee(data);
                 }
             } catch (error) {
                 if (error.response && !error.response.data.success) {
@@ -43,7 +43,11 @@ const List = () => {
         }
         fetchEmployees();
     }, [])
-
+    const handleFilter = (e) => {
+        const records = employees.filter((emp) =>
+            emp.name.toLowerCase().includes(e.target.value.toLowerCase()))
+        setFilterEmployee(records);
+    }
     return (
         <div className='p-3'>
             <div className='text-center'>
@@ -54,6 +58,7 @@ const List = () => {
                     type='text'
                     placeholder='Search By Emp Name'
                     className='px-4 py-0.5 border shadow-xl bg-transparent border-stone-500 text-green-500 rounded-md'
+                    onChange={handleFilter}
                 />
                 <Link to='/admin-dashboard/add-employee'
                     className='px-4 py-1 bg-teal-600 text-white no-underline rounded-lg'
@@ -62,7 +67,7 @@ const List = () => {
                 </Link>
             </div>
             <div className='mt-4'>
-                <DataTable columns={columns} data={employees} pagination={true} />
+                <DataTable columns={columns} data={filterEmployee} pagination={true} />
             </div>
         </div>
     );

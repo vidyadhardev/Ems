@@ -4,11 +4,18 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const Edit = () => {
-    const [employee, setEmployee] = useState([]);
+    const [employee, setEmployee] = useState({
+        name: '',
+        maritalStatus: '',
+        designation: '',
+        salary: '',
+        department: '',
+    });
     const [departments, setDepartments] = useState([]);
     const navigate = useNavigate();
     const { id } = useParams();
-    //fetch department using useEffect 
+
+    // Fetch departments
     useEffect(() => {
         const getDepartment = async () => {
             const department = await fetchDepartments();
@@ -16,8 +23,9 @@ const Edit = () => {
         };
         getDepartment();
     }, []);
+
+    // Fetch employee data
     useEffect(() => {
-        debugger;
         const fetchEmployees = async () => {
             try {
                 const response = await axios.get(`http://localhost:5000/api/employee/${id}`, {
@@ -28,8 +36,14 @@ const Edit = () => {
 
                 if (response.data.success) {
                     // Access the first employee from the employees array
-                    console.log(response.data.employees);
-                    setEmployee(response.data.employees[0]);
+                    const empData = response.data.employees[0];
+                    setEmployee({
+                        name: empData.userId?.name || '',
+                        maritalStatus: empData.maritalStatus || '',
+                        designation: empData.designation || '',
+                        salary: empData.salary || '',
+                        department: empData.department?._id || ''
+                    });
                 }
 
             } catch (error) {
@@ -38,37 +52,28 @@ const Edit = () => {
         };
 
         fetchEmployees();
-    }, []);
+    }, [id]);
 
     const handleChange = (e) => {
-        const { name, value, files } = e.target;
-        if (name === 'image') {
-            setFormData((prev) => ({ ...prev, [name]: files[0] }));
-        } else {
-            setFormData((prev) => ({ ...prev, [name]: value }));
-        }
+        const { name, value } = e.target;
+        setEmployee(prev => ({ ...prev, [name]: value }));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const formDataObj = new FormData();
-        Object.keys(formData).forEach((key) => {
-            formDataObj.append(key, formData[key]);
-        });
         try {
-            const response = await axios.post(
-                'http://localhost:5000/api/employee/add',
-                formDataObj,
+            const response = await axios.put(
+                `http://localhost:5000/api/employee/${id}`,
+                employee,
                 {
                     headers: {
                         "Authorization": `Bearer ${localStorage.getItem('token')}`,
-                        "Content-Type": "multipart/form-data"
+                        "Content-Type": "application/json"
                     }
                 }
             );
 
             if (response.data.success) {
-                console.log(response.data);
                 alert(response.data.message);
                 navigate('/admin-dashboard/employee');
             }
@@ -90,10 +95,7 @@ const Edit = () => {
                 <form onSubmit={handleSubmit}>
                     <div className=' mt-4 grid grid-cols-1 md:grid-cols-2 gap-4'>
                         <div>
-                            <label
-                                htmlFor='name'
-                                className='block text-sm font-medium text-gray-700'
-                            >
+                            <label htmlFor='name' className='block text-sm font-medium text-gray-700'>
                                 Name
                             </label>
                             <input
@@ -101,22 +103,21 @@ const Edit = () => {
                                 name="name"
                                 className='w-full'
                                 placeholder="Enter Name"
-                                value={employee.userId?.name}
+                                value={employee.name}
                                 onChange={handleChange}
-                                required />
+                                required 
+                            />
                         </div>
                         <div>
-                            <label
-                                htmlFor='maritalStatus'
-                                className='block text-sm font-medium text-gray-700'
-                            >
+                            <label htmlFor='maritalStatus' className='block text-sm font-medium text-gray-700'>
                                 Marital Status
                             </label>
-                            <select name="maritalStatus"
+                            <select 
+                                name="maritalStatus"
                                 className='w-full'
                                 onChange={handleChange}
                                 required
-                                value={employee.maritalStatus ? employee.maritalStatus : 'N/A'}
+                                value={employee.maritalStatus}
                             >
                                 <option value="">Select Marital Status</option>
                                 <option value="single">Single</option>
@@ -124,49 +125,25 @@ const Edit = () => {
                             </select>
                         </div>
                         <div>
-                            <label
-                                htmlFor='department'
-                                className='block text-sm font-medium text-gray-700'
-                            >
+                            <label htmlFor='designation' className='block text-sm font-medium text-gray-700'>
                                 Designation
                             </label>
-                            <input type="text"
+                            <input
+                                type="text"
+                                className='w-full'
                                 name="designation"
                                 placeholder="Designation"
-                                value={employee.designation?.designation || 'N/A'}
+                                value={employee.designation}
                                 onChange={handleChange}
                                 required
-
                             />
                         </div>
-                        <div className='col-span-2'>
-                            <label
-                                htmlFor='department'
-                                className='block text-sm font-medium text-gray-700'
-                            >
-                                Department
-                            </label>
-                            <select
-                                name="department"
-                                className='w-full'
-                                onChange={handleChange}
-                                required
-                                value={employee.department?.dep_name || 'N/A'}
-                            >
-                                <option value="">Select Department</option>
-                                {departments.map(dep => (
-                                    <option key={dep._id} value={dep._id}>{dep.dep_name}</option>
-                                ))}
-                            </select>
-                        </div>
                         <div>
-                            <label
-                                htmlFor='salary'
-                                className='block text-sm font-medium text-gray-700'
-                            >
+                            <label htmlFor='salary' className='block text-sm font-medium text-gray-700'>
                                 Salary
                             </label>
-                            <input type="number"
+                            <input 
+                                type="number"
                                 className='w-full'
                                 name="salary"
                                 placeholder="Salary"
@@ -175,11 +152,29 @@ const Edit = () => {
                                 required
                             />
                         </div>
+                        <div className='col-span-2'>
+                            <label htmlFor='department' className='block text-sm font-medium text-gray-700'>
+                                Department
+                            </label>
+                            <select
+                                name="department"
+                                className='w-full'
+                                onChange={handleChange}
+                                required
+                                value={employee.department}
+                            >
+                                <option value="">Select Department</option>
+                                {departments.map((dep) => (
+                                    <option key={dep._id} value={dep._id}>
+                                        {dep.dep_name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
                     </div>
                     <div>
-                        <button type="submit"
-                            className="w-full mt-6 mb-4 bg-teal-700 text-white px-4 py-2 rounded-md"
-                        >Submit
+                        <button type="submit" className="w-full mt-6 mb-4 bg-teal-700 text-white px-4 py-2 rounded-md">
+                            Update Employee
                         </button>
                     </div>
                 </form>

@@ -120,25 +120,27 @@ const View = () => {
                     className='rounded-full border w-40 h-40 object-cover'
                 />
             </div>
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-                <div className='space-y-4'>
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-6 ms-5'>
+                <div className='space-y-1'>
                     <InfoRow label="Name" value={employee.userId?.name} />
                     <InfoRow label="Employee ID" value={employee.employeeId} />
                     <InfoRow label="Date of Birth" value={employee.dob ? new Date(employee.dob).toLocaleDateString() : 'N/A'} />
                     <InfoRow label="Gender" value={employee.gender} />
                 </div>
-                <div className='space-y-4'>
+                <div className='space-y-1'>
                     <InfoRow label="Department" value={employee.department?.dep_name || 'N/A'} />
-                    <InfoRow label="Designation" value={employee.designation?.designation || 'N/A'} />
-                    <InfoRow label="Description" value={employee.department?.description || 'N/A'} />
+                    <InfoRow label="Designation" value={employee.designation || 'N/A'} />
+                    {/* <InfoRow label="Description" value={employee.department?.description || 'N/A'} /> */}
                     <InfoRow label="Salary" value={`₹ ${employee.salary}`} />
                     <InfoRow label="Marital Status" value={employee.maritalStatus ? employee.maritalStatus : 'N/A'} />
-                    </div>
+                </div>
             </div>
-            <Link to="/admin-dashboard/employee"
-            className="w-full bg-teal-700 text-white px-4 py-2 no-underline rounded-md">
+           <div className='ms-5 mt-4 w-60'>
+           <Link to="/admin-dashboard/employee"
+                className="flex bg-teal-700 text-white px-4 text-center justify-center py-2 no-underline rounded-md">
                 Back
             </Link>
+           </div>
         </div>
     );
 };
