@@ -3,8 +3,8 @@ import User from "../models/Users.js";
 import bcrypt from 'bcrypt';
 import multer from 'multer';
 import path from 'path';
-import Department from '../models/Department.js';
-import { error } from "console";
+// import Department from '../models/Department.js';
+// import { error } from "console";
 // Storage setup for multer
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -15,7 +15,6 @@ const storage = multer.diskStorage({
     }
 });
 const upload = multer({ storage: storage });
-
 // Add employee function
 const addEmployee = async (req, res) => {
     try {
@@ -32,18 +31,14 @@ const addEmployee = async (req, res) => {
             password,
             role
         } = req.body;
-
         const existingUser = await User.findOne({ email });
         if (existingUser) {
             return res.status(400).json({ success: false, error: "User already exists" });
         }
-
         if (!password) {
             return res.status(400).json({ success: false, error: "Password is required" });
         }
-
         const hashedPassword = await bcrypt.hash(password, 10);
-
         const newUser = new User({
             name,
             email,
@@ -51,9 +46,7 @@ const addEmployee = async (req, res) => {
             role,
             profileImage: req.file ? req.file.filename : ""
         });
-
         const savedUser = await newUser.save();
-
         const newEmployee = new Employee({
             userId: savedUser._id,
             employeeId,
@@ -64,7 +57,6 @@ const addEmployee = async (req, res) => {
             department,
             salary
         });
-
         await newEmployee.save();
         return res.status(200).json({ success: true, message: "Employee created successfully" });
     } catch (error) {
@@ -81,7 +73,7 @@ const getEmployees = async (req, res) => {
         return res.status(500).json({ success: false, error: "get employee server error !" })
     }
 }
-// Method Use for Employee Profile Views Page In frontend
+// Method Use for Employee Profile Views.jsx Page In frontend
 const getEmployee = async (req, res) => {
     const { id } = req.params;
     try {
@@ -91,7 +83,6 @@ const getEmployee = async (req, res) => {
         return res.status(500).json({ success: false, error: "get employee view server error !" })
     }
 }
-
 const updateEmployee = async (req, res) => {
     try {
         const { id } = req.params;

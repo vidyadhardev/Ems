@@ -60,6 +60,7 @@ const Edit = () => {
     };
 
     const handleSubmit = async (e) => {
+        debugger;
         e.preventDefault();
         try {
             const response = await axios.put(
