@@ -9,7 +9,7 @@ const userRegister = async () => {
     //  Here User imported From Model 
     const newUser = new User({
       name: "Admin",
-      email: "vidya@gmail.com",
+      email: "vidya@zohomail.com",
       password: hashPassword,
       role: "admin"
     });

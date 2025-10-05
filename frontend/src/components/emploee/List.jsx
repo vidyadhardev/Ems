@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import {React, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { columns, EmplyeeButtons } from '../../utils/EmployeeHelper.jsx';
 import DataTable from 'react-data-table-component';
@@ -21,7 +21,7 @@ const List = () => {
                     const data = response.data.employees.map((emp) => ({
                         _id: emp._id,
                         sno: sno++,
-                        dep_name: emp.department.dep_name ? emp.department.dep_name.toLowerCase()
+                        dep_name: emp.department ? emp.department.dep_name.toLowerCase()
                             .split(' ')
                             .map(word => word.charAt(0).toUpperCase() + word.slice(1))
                             .join(' ') : "Not Assigned",
@@ -32,16 +32,23 @@ const List = () => {
                     }));
                     setEmployees(data);
                     setFilterEmployee(data);
+                   
+                    console.log("setemployee: " ,setEmployees);
+                    
                 }
             } catch (error) {
                 if (error.response && !error.response.data.success) {
                     alert(error.response.data.error, "Error")
+                    
+                    console.log(error.response.data.error, "Error");
+                    
                 }
             } finally {
                 setEmpLoading(false);
             }
         }
         fetchEmployees();
+        
     }, [])
     const handleFilter = (e) => {
         const records = employees.filter((emp) =>

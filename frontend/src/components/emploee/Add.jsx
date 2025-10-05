@@ -9,6 +9,7 @@ const Add = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        debugger;
         const getDepartment = async () => {
             const department = await fetchDepartments();
             setDepartments(department);
@@ -26,6 +27,7 @@ const Add = () => {
     };
 
     const handleSubmit = async (e) => {
+        debugger;
         e.preventDefault();
         const formDataObj = new FormData();
         Object.keys(formData).forEach((key) => {
@@ -45,7 +47,7 @@ const Add = () => {
 
             if (response.data.success) {
                 console.log(response.data);
-
+                debugger;
                 alert(response.data.message);
                 navigate('/admin-dashboard/employee');
             }
