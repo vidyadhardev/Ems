@@ -33,7 +33,7 @@ const List = () => {
                     setEmployees(data);
                     setFilterEmployee(data);
                    
-                    console.log("setemployee: " ,setEmployees);
+                    // console.log("setemployee: " ,setEmployees);
                     
                 }
             } catch (error) {

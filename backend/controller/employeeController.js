@@ -114,13 +114,23 @@ const updateEmployee = async (req, res) => {
             salary,
             department
         })
-        if(!updateEmployee || !updateUser){
-            return res.status(404).json({success:false,error:"details not found !"})
+        if (!updateEmployee || !updateUser) {
+            return res.status(404).json({ success: false, error: "details not found !" })
         }
-        return res.status(200).json({success:true,message:"employee update successful"})
+        return res.status(200).json({ success: true, message: "employee update successful" })
     } catch (error) {
         return res.status(500).json({ success: false, error: "update employee server error !" })
     }
 }
 
-export { addEmployee, upload, getEmployees, getEmployee, updateEmployee };
+const fetcheEmployeesByDepId = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const employees = await Employee.find({ department: id })
+        return res.status(200).json({ success: true, employees, message: "employee added." })
+    } catch (error) {
+        return res.status(500).json({ success: false, error: "get employeesByDepId Salary server error !" })
+    }
+}
+export { addEmployee, upload, getEmployees, getEmployee, updateEmployee, fetcheEmployeesByDepId };
+

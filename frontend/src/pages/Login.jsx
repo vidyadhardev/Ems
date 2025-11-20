@@ -91,3 +91,62 @@ const Login = () => {
 }
 
 export default Login;
+
+
+
+
+// import React, { useEffect, useState } from 'react';
+// import axios from 'axios';
+
+// const AtalAwasiyaData = () => {
+//   const [data, setData] = useState(null); // for storing response data
+//   const [loading, setLoading] = useState(true);
+//   const [error, setError] = useState(null);
+
+//   useEffect(() => {
+//     const fetchData = async () => {
+//         debugger;
+//       try {
+//         const formDataObj = {
+//           LabregNo: "09485598236429"
+//         };
+
+//         const response = await axios.post(
+//           "http://65.0.224.140:8060/api/AtalAwasiya/GetDataForAtalAwasiya",
+//           formDataObj,
+//           {
+//             headers: {
+//               "Content-Type": "application/json", // since you're sending JSON
+//               "Authorization": `Bearer` // optional if needed
+//             }
+//           }
+//         );
+
+//         console.log("API Response:", response.data);
+//         setData(response.data);
+//       } catch (err) {
+//         console.error("Error fetching data:", err);
+//         setError(err.message);
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+
+//     fetchData(); // run on load
+//     console.log(fetchData);
+    
+//   }, []); // empty dependency = run once on mount
+
+//   if (loading) return <p>Loading...</p>;
+//   if (error) return <p style={{ color: "red" }}>Error: {error}</p>;
+// console.log(error);
+
+//   return (
+//     <div>
+//       <h2>Atal Awasiya API Data</h2>
+//       <pre>{JSON.stringify(data, null, 2)}</pre>
+//     </div>
+//   );
+// };
+
+// export default AtalAwasiyaData;

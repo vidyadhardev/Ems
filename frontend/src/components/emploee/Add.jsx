@@ -9,7 +9,7 @@ const Add = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        debugger;
+        // debugger;
         const getDepartment = async () => {
             const department = await fetchDepartments();
             setDepartments(department);
@@ -27,7 +27,7 @@ const Add = () => {
     };
 
     const handleSubmit = async (e) => {
-        debugger;
+        // debugger;
         e.preventDefault();
         const formDataObj = new FormData();
         Object.keys(formData).forEach((key) => {
@@ -36,6 +36,7 @@ const Add = () => {
         try {
             const response = await axios.post(
                 'http://localhost:5000/api/employee/add',
+                // 'http://65.0.224.140:8060/api/AtalAwasiya/GetDataForAtalAwasiya',
                 formDataObj,
                 {
                     headers: {
@@ -47,7 +48,7 @@ const Add = () => {
 
             if (response.data.success) {
                 console.log(response.data);
-                debugger;
+                // debugger;
                 alert(response.data.message);
                 navigate('/admin-dashboard/employee');
             }

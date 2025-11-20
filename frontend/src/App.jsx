@@ -14,6 +14,8 @@ import List from "./components/emploee/List.jsx";
 import Add from "./components/emploee/Add.jsx";
 import View from "./components/emploee/View.jsx";
 import Edit from "./components/emploee/Edit.jsx";
+// import AtalAwasiyaData from "./pages/Login.jsx";
+import AddSalary from "./components/salary/Add.jsx";
 const App = () => {
   return (
     <>
@@ -21,6 +23,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Navigate to="/admin-dashboard" />} />
           <Route path="/login" element={<Login />} />
+          {/* <Route path="/login" element={<AtalAwasiyaData/>}/> */}
           {/* protect admin routes from PrivateRoutes & RoleBaseRoutes used */}
           <Route path="/admin-dashboard" element={
             <PrivateRoutes>
@@ -37,7 +40,8 @@ const App = () => {
             <Route path="/admin-dashboard/add-employee" element={<Add />}></Route>
             <Route path="/admin-dashboard/employee/:id" element={<View />}></Route>
             <Route path="/admin-dashboard/employee/edit/:id" element={<Edit />}></Route>
-
+            {/* <Route path="/admin-dashboard/employee/salary/${id}" element={<View/>}></Route> */}
+            <Route path="/admin-dashboard/salary" element={<AddSalary/>}></Route>
           </Route>
           <Route path="/employee-dashboard" element={<EmployeeDashboard />} />
         </Routes>
